@@ -1,0 +1,85 @@
+\subsection{Scoring}
+Provided nobody folded, it's time to figure out who actually got the better hand.
+
+To do that, you essentially score it like an 8-card cribbage hand.
+
+Using the four cards on the table and the four cards in your hand, count every combination of the following:
+
+\begin{center}
+    \begin{tabular}{r|c|l}
+        Name & Points & Description\\\hline
+        Pair & 2 & Two cards of the same rank\\
+        Fifteen & 2 & Two or more cards add up to 15\\
+        Triplet & 6 & Three cards of the same rank (same as three pairs)\\
+        Quadruplet & 12 & Four cards of the same rank (same as six pairs)\\
+        Run & 3 to 8 & Three or more cards in sequence\\
+        Flush & 4 to 8 & Four or more cards of the same suit\\
+    \end{tabular}
+\end{center}
+
+\subsubsection{Card Values}
+For the purposes of summing cards (adding to 15), cards have the following values:
+\begin{center}
+    \begin{tabular}{c|c|c|c}
+        Ace & 2--10 & Jack, Queen, King & Joker\\\hline
+        1 & printed value & 10 & none\\ 
+    \end{tabular}
+\end{center}
+\note The Joker doesn't have a value of 0, it has no value at all. You can't use it to make Fifteens.
+
+\subsubsection{Runs and Flushes}
+Runs and flushes are the \textit{longest} sequence containing a given unique set of cards. That means the run \[\clubsuit A, \heartsuit 2, \spadesuit 3, \diamondsuit 4\] is worth 4 points, and is \textbf{not} two runs of length 3 and one run of length 4 for a total of 10 points.
+
+However, should you have another card of the same rank on your hand, such as \[\clubsuit A, \heartsuit 2, \spadesuit 3, \clubsuit 3, \diamondsuit 4\] you now have two runs and a pair, more than doubling the value of your run (4 from each run and 2 from the pair) .
+
+\subsubsection{The Joker}
+The Joker is meant as a bit of a wild-card for the purposes of making runs (i.e. straights) and flushes.
+
+\paragraph{Runs} For runs, the Joker can act as a stand-in for any other card value, including 0 and 14 (if you think of the King as 13th in the sequence), and can thus be used to loop runs around. 
+With a Joker, The following run is legal:
+\begin{center}
+    \textit{Queen -- King -- Joker -- Ace -- 2 -- 3}
+\end{center}
+
+The Joker also follows the previous rule about unique cards.
+This means \textit{Joker -- 2 -- 3} and \textit{2 -- 3 -- Joker} are the same run, and is thus \textit{not} counted twice.
+
+\paragraph{Flushes} A typical deck of cards includes a coloured Joker and a monochrome Joker. 
+The monochrome Joker can be used to add an extra point in any flush with a black suit, the coloured one works the same for red suits.
+
+\note The Joker can \textbf{only} be used for runs and flushes, \textit{not} pairs, triplets, quads, and fifteens.
+
+\subsubsection{You Miss It, You Lose It}
+If you miss any of the scoring values, you lose it. So even if your hand is technically worth more than your opponent's. If you count it wrong and miss some of its potential value, you risk losing the round.
+
+\subsubsection{Example: Scoring a Hand}
+Suppose you have a hand containing the following cards:
+\[ \spadesuit 5,\ \heartsuit 5,\ \spadesuit 3, \textit{B\&W-Joker} \]
+And the crib contains the following:
+\[ \diamondsuit 6,\ \heartsuit 7,\ \heartsuit Q,\ \heartsuit J\]
+You then have
+\begin{center}
+\begin{tabular}{c|c|c|c}
+    Cards & Combo & Points & Current Total\\\hline
+    $\spadesuit 5, \spadesuit 5$ & Pair & 2 & 2\\
+    $\spadesuit 5 + \heartsuit J$ & Fifteen & 2 & 4 \\
+    $\spadesuit 5 + \heartsuit Q$ & Fifteen & 2 & 6 \\
+    $\heartsuit 5 + \heartsuit J$ & Fifteen & 2 & 8 \\
+    $\heartsuit 5 + \heartsuit Q$ & Fifteen & 2 & 10 \\
+    $\spadesuit 5 + \heartsuit 7 + \spadesuit 3$ & Fifteen & 2 & 12\\
+    $\heartsuit 5 + \heartsuit 7 + \spadesuit 3$ & Fifteen & 2 & 14\\
+    $\heartsuit 5, \heartsuit 7, \heartsuit J, \heartsuit Q$ & 4-Flush & 4 & 18\\
+    $\spadesuit 3, Joker, \heartsuit 5, \diamondsuit 6, \heartsuit 7$ & 5-Run & 5 & 23\\
+    $\spadesuit 3, Joker, \spadesuit 5, \diamondsuit 6, \heartsuit 7$ & 5-Run & 5 & 28\\
+    $\heartsuit J, \heartsuit Q, Joker$ & 3-Run & 3 & 31\\ 
+\end{tabular}
+\end{center}
+As you may very well notice, it's possible to get scores much higher than 29---the maximum in Cribbage.
+\note that since we're dealing with the monochrome Joker, it can't be used in the flush of hearts, since hearts aren't a black suit.
+
+\paragraph{Challenge} Can you figure out what the following hand is worth?
+\begin{align*}
+\mathbf{Hand}: \heartsuit A, \clubsuit 2, \clubsuit 3, \diamondsuit 3\\
+\mathbf{Crib}: \diamondsuit A, \spadesuit 2, \heartsuit 3, \spadesuit 3
+\end{align*}
+Answer on last page.
