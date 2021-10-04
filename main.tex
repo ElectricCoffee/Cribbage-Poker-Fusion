@@ -1,0 +1,185 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\title{%
+Skalborg\\
+\normalsize A Cribbage \& Poker Fusion for 2--4 players}
+\author{Niko Lepka \& Marco Louis Lund Olsen}
+\date{September 2021}
+
+\begin{document}
+
+\maketitle
+
+\newcommand{\name}{Skalborg}
+\newcommand{\note}{\paragraph{Note}}
+\newcommand{\example}{\paragraph{Example}}
+
+\section{Introduction}
+
+\name{} is a Cribbage-like game for 2 players, that plays like Texas or Omaha Hold 'Em.
+
+The game is split into two phases: a bidding phase and a scoring phase. 
+
+\subsection{Materials}
+To play \name{} you need
+
+\begin{enumerate}
+    \item A standard 52-card deck + 2 Jokers
+    \item A set of Poker chips
+\end{enumerate}
+
+\note Unlike most Cribbage variants you do \textit{not} need a Cribbage board.
+
+\section{Gameplay}
+
+\subsection{Blind Bids}
+Before a hand is dealt, a set of blind bids (blinds for short) must be placed, to create an ante.
+
+It's ultimately up to you how you structure this, but here are some options for your consideration:
+\begin{itemize}
+    \item \textbf{Equal Blinds:} Both the dealer and the non-dealer ante the same blinds.
+    \item \textbf{Small/Big:} Dealer gets the small blind, non-dealer gets the big one.
+    \item \textbf{Non-Dealer Only:} Only the non-dealer makes a blind bid.
+\end{itemize}
+For fairness, make sure to play with the same blinds structure for the whole game.
+
+\subsection{Dealing}
+Like in old-school Cribbage, each player is dealt five cards (not six). 
+Each player then discards one of their cards into the crib face down.
+
+Then ``burn'' one card from the top of the deck, and add the top two cards from the top of the deck to the crib, and shuffle the crib thoroughly.
+
+\subsection{Bidding}
+
+After the cards have been dealt and two of the cards have been discarded into the crib comes the bidding phase, consisting of three rounds of bidding like in Texas Hold 'Em Poker: The \textit{Flop}, the \textit{Turn}, and the \textit{River}.
+
+Before the Flop, the dealer must either call the blind or raise it.
+
+\subsubsection{Flop}
+Turn over two of the cards in the crib face-up onto the table in front of the players.
+
+At this point, both players get a chance to bid or fold based on the current board-state.
+
+\subsubsection{Turn}
+Turn over another one of the face-down cards in the crib and commence another round of bidding and/or folding.
+
+\subsubsection{River}
+Finally, turn over the last of the face-down crib cards, and do one last round of bidding.
+
+\subsection{Scoring}
+Provided nobody folded, it's time to figure out who actually got the better hand.
+
+To do that, you essentially score it like an 8-card cribbage hand.
+
+Using the four cards on the table and the four cards in your hand, count every combination of the following:
+
+\begin{center}
+    \begin{tabular}{r|c|l}
+        Name & Points & Description\\\hline
+        Pair & 2 & Two cards of the same rank\\
+        Fifteen & 2 & Two or more cards add up to 15\\
+        Triplet & 6 & Three cards of the same rank (same as three pairs)\\
+        Quadruplet & 12 & Four cards of the same rank (same as six pairs)\\
+        Run & 3 to 8 & Three or more cards in sequence\\
+        Flush & 4 to 8 & Four or more cards of the same suit\\
+    \end{tabular}
+\end{center}
+
+\subsubsection{Card Values}
+For the purposes of summing cards (adding to 15), cards have the following values:
+\begin{center}
+    \begin{tabular}{c|c|c|c}
+        Ace & 2--10 & Jack, Queen, King & Joker\\\hline
+        1 & printed value & 10 & none\\ 
+    \end{tabular}
+\end{center}
+\note The Joker doesn't have a value of 0, it has no value at all. You can't use it to make Fifteens.
+
+\subsubsection{Runs and Flushes}
+Runs and flushes are the \textit{longest} sequence containing a given unique set of cards. That means the run \[\clubsuit A, \heartsuit 2, \spadesuit 3, \diamondsuit 4\] is worth 4 points, and is \textbf{not} two runs of length 3 and one run of length 4 for a total of 10 points.
+
+However, should you have another card of the same rank on your hand, such as \[\clubsuit A, \heartsuit 2, \spadesuit 3, \clubsuit 3, \diamondsuit 4\] you now have two runs and a pair, more than doubling the value of your run (4 from each run and 2 from the pair) .
+
+\subsubsection{The Joker}
+The Joker is meant as a bit of a wild-card for the purposes of making runs (i.e. straights) and flushes.
+
+\paragraph{Runs} For runs, the Joker can act as a stand-in for any other card value, including 0 and 14 (if you think of the King as 13th in the sequence), and can thus be used to loop runs around. 
+With a Joker, The following run is legal:
+\begin{center}
+    \textit{Queen -- King -- Joker -- Ace -- 2 -- 3}
+\end{center}
+
+The Joker also follows the previous rule about unique cards.
+This means \textit{Joker -- 2 -- 3} and \textit{2 -- 3 -- Joker} are the same run, and is thus \textit{not} counted twice.
+
+\paragraph{Flushes} A typical deck of cards includes a coloured Joker and a monochrome Joker. 
+The monochrome Joker can be used to add an extra point in any flush with a black suit, the coloured one works the same for red suits.
+
+\note The Joker can \textbf{only} be used for runs and flushes, \textit{not} pairs, triplets, quads, and fifteens.
+
+\subsubsection{You Miss It, You Lose It}
+If you miss any of the scoring values, you lose it. So even if your hand is technically worth more than your opponent's. If you count it wrong and miss some of its potential value, you risk losing the round.
+
+\subsubsection{Example: Scoring a Hand}
+Suppose you have a hand containing the following cards:
+\[ \spadesuit 5,\ \heartsuit 5,\ \spadesuit 3, \textit{B\&W-Joker} \]
+And the crib contains the following:
+\[ \diamondsuit 6,\ \heartsuit 7,\ \heartsuit Q,\ \heartsuit J\]
+You then have
+\begin{center}
+\begin{tabular}{c|c|c|c}
+    Cards & Combo & Points & Current Total\\\hline
+    $\spadesuit 5, \spadesuit 5$ & Pair & 2 & 2\\
+    $\spadesuit 5 + \heartsuit J$ & Fifteen & 2 & 4 \\
+    $\spadesuit 5 + \heartsuit Q$ & Fifteen & 2 & 6 \\
+    $\heartsuit 5 + \heartsuit J$ & Fifteen & 2 & 8 \\
+    $\heartsuit 5 + \heartsuit Q$ & Fifteen & 2 & 10 \\
+    $\spadesuit 5 + \heartsuit 7 + \spadesuit 3$ & Fifteen & 2 & 12\\
+    $\heartsuit 5 + \heartsuit 7 + \spadesuit 3$ & Fifteen & 2 & 14\\
+    $\heartsuit 5, \heartsuit 7, \heartsuit J, \heartsuit Q$ & 4-Flush & 4 & 18\\
+    $\spadesuit 3, Joker, \heartsuit 5, \diamondsuit 6, \heartsuit 7$ & 5-Run & 5 & 23\\
+    $\spadesuit 3, Joker, \spadesuit 5, \diamondsuit 6, \heartsuit 7$ & 5-Run & 5 & 28\\
+    $\heartsuit J, \heartsuit Q, Joker$ & 3-Run & 3 & 31\\ 
+\end{tabular}
+\end{center}
+As you may very well notice, it's possible to get scores much higher than 29---the maximum in Cribbage.
+\note that since we're dealing with the monochrome Joker, it can't be used in the flush of hearts, since hearts aren't a black suit.
+
+\paragraph{Challenge} Can you figure out what the following hand is worth?
+\begin{align*}
+\mathbf{Hand}: \heartsuit A, \clubsuit 2, \clubsuit 3, \diamondsuit 3\\
+\mathbf{Crib}: \diamondsuit A, \spadesuit 2, \heartsuit 3, \spadesuit 3
+\end{align*}
+Answer on last page.
+
+\newpage
+\section{Recap}
+
+To quickly recap the rules, here's how it goes:
+
+\begin{enumerate}
+    \item Shuffle the deck
+    \item Players pay their blinds
+    \item Deal 5 cards to each player
+    \item Call blinds
+    \item Players discard 1 card to the crib
+    \item First betting phase
+    \item A card is burned and two cards are turned over from the deck
+    \item Second betting phase
+    \item First discarded card is turned over
+    \item Third betting phase
+    \item Second discarded card is turned over
+    \item Scoring phase
+\end{enumerate}
+
+\section{3--4 Players}
+To play this game with more players, simply reduce the number of cards taken from the deck in the crib by 1 for each player added.
+
+For three players, each player discards one card to the crib, then a card from the deck is burned, and one added. For four players, no cards from the deck are needed.
+
+\paragraph{Scoring Challenge Answer}
+By my best counting, it's 16 runs of 3, two pairs, and a quad, which makes $16 \times 3 + 2 \times 2 + 12 = 64$ points.
+
+\end{document}
